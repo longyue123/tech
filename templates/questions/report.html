@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load common_fillter %}
+{% block content %}
+<div id="content">
+    <div class="col-md-12 padding-0 form-element">
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 style="text-align: center">本周问题反馈</h3>
+          </div>
+          <div class="panel-body">
+            <div class="responsive-table">
+              <div id="datatables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table class="table table-striped table-bordered dataTable no-footer" width="100%" cellspacing="0"  style="width: 100%;">
+                      <thead>
+                        <tr role="row">
+                            <th class="sorting">模块</th>
+                            <th class="sorting" >总的问题数</th>
+                            <th class="sorting" >已解决</th>
+                            <th class="sorting">新提出</th>
+                            <th class="sorting">待跟进</th>
+                            <th class="sorting">解决率</th>
+                            <th class="sorting">详情</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for k,v in now_week_questions.items %}
+                             <tr role="row" class="odd">
+                                <td class="sorting" style="width: 5%;word-break: break-all">{{ k }}</td>
+                                <td class="sorting">{{ v.Total }}</td>
+                                <td class="sorting">{{ v.Done }}</td>
+                                <td class="sorting">{{ v.New }}</td>
+                                <td class="sorting">{{ v.In_Progress }}</td>
+                                <td class="sorting">{{ v.Resolve }}</td>
+                                <td class="sorting">
+                                     <button class="btn btn-primary btn-sm" onclick=serach_questions_by_modle_name('{{ k }}',1)>详情</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 style="text-align: center">所有问题反馈</h3>
+          </div>
+          <div class="panel-body">
+            <div class="responsive-table">
+              <div id="datatables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table class="table table-striped table-bordered dataTable no-footer" width="100%" cellspacing="0"  style="width: 100%;">
+                      <thead>
+                        <tr role="row">
+                            <th class="sorting">模块</th>
+                            <th class="sorting" >总的问题数</th>
+                            <th class="sorting" >已解决</th>
+                            <th class="sorting">新提出</th>
+                            <th class="sorting">待跟进</th>
+                            <th class="sorting">解决率</th>
+                            <th class="sorting">详情</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for k,v in all_questions.items %}
+                             <tr role="row" class="odd">
+                                <td class="sorting" style="width: 5%;word-break: break-all">{{ k }}</td>
+                                <td class="sorting">{{ v.Total }}</td>
+                                <td class="sorting">{{ v.Done }}</td>
+                                <td class="sorting">{{ v.New }}</td>
+                                <td class="sorting">{{ v.In_Progress }}</td>
+                                <td class="sorting">{{ v.Resolve }}</td>
+                                <td class="sorting">
+                                    <button class="btn btn-primary btn-sm" onclick=serach_questions_by_modle_name('{{ k }}',0)>详情</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 style="text-align: center">待跟进问题</h3>
+          </div>
+          <div class="panel-body">
+            <div class="responsive-table">
+              <div id="datatables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table class="table table-striped table-bordered dataTable no-footer" width="100%" cellspacing="0"  style="width: 100%;">
+                      <thead>
+                        <tr role="row">
+                            <th class="sorting">项目</th>
+                            <th class="sorting">模块</th>
+                            <th class="sorting" >问题描述</th>
+                            <th class="sorting" >问题解决方案</th>
+                            <th class="sorting">状态</th>
+                            <th class="sorting">提出日期</th>
+                            <th class="sorting">解决日期</th>
+                            <th class="sorting">是否系统导致</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for obj in not_done_questions %}
+                             <tr role="row" class="odd">
+                                <td class="sorting" style="width: 5%;word-break: break-all">{{ obj.project }}</td>
+                                <td class="sorting" style="width: 5%;word-break: break-all">{{ obj.question_module }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 15%">{{ obj.question_desc }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 15%">{{ obj.question_reason }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 10%;">{{ obj.question_progress }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 10%">{{ obj.create_time |  convert_date_time_to_str}} </td>
+                                <td class="sorting" style="word-break: break-all;width: 10%">{{ obj.update_time | convert_date_time_to_str }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 5%">{{ obj.is_system_cause }}</td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</div>
+{% endblock %}

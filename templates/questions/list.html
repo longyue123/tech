@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load common_fillter %}
+{% block content %}
+<div id="content">
+    <div class="col-md-12 padding-0 form-element">
+      <div class="col-md-12">
+       <div class="panel form-element-padding">
+            <div class="panel-heading">
+              <h4>问题列表</h4>
+            </div>
+            <div class="panel-body" style="padding-bottom:30px;">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label text-right" >项目</label>
+                  <div class="col-sm-2">
+                    <select class="form-control" id="project_search">
+                        <option value="">请选择</option>
+                        {% for obj in project_list %}
+                            <option value="{{ obj }}">{{ obj }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+
+                  <label class="col-sm-2 control-label text-right" >模块</label>
+                  <div class="col-sm-2">
+                    <select class="form-control" id="module_search">
+                        <option value="">请选择</option>
+                        {% for obj in module_list %}
+                            <option value="{{ obj }}">{{ obj }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+
+                  <label class="col-sm-2 control-label text-right" >进度</label>
+                  <div class="col-sm-2">
+                      <select class="form-control" id="progress_search">
+                          <option value="">请选择</option>
+                          {% for obj in progress_list %}
+                              <option value="{{ obj }}">{{ obj }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label text-right">开始时间</label>
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control" style="width: 100%" id="start_time_search">
+                  </div>
+
+                  <label class="col-sm-2 control-label text-right">结束时间</label>
+                  <div class="col-sm-2">
+                     <input type="text" class="form-control" style="width: 100%" id="end_time_search">
+                  </div>
+
+
+                  <div class="col-sm-2">
+                     <input class="submit btn btn-danger" type="submit" value="提交" onclick="serach_questions()" >
+                  </div>
+                </div>
+            </div>
+       </div>
+        <div class="panel">
+          <div class="panel-heading">
+            <h3>问题列表</h3>
+          </div>
+          <div class="panel-body">
+            <div class="responsive-table">
+              <div id="datatables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table class="table table-striped table-bordered dataTable no-footer" width="100%" cellspacing="0"  style="width: 100%;">
+                      <thead>
+                        <tr role="row">
+                            <th class="sorting">ID</th>
+                            <th class="sorting">项目</th>
+                            <th class="sorting">模块</th>
+                            <th class="sorting" >问题描述</th>
+                            <th class="sorting" >问题解决方案</th>
+                            <th class="sorting">提出者</th>
+                            <th class="sorting"  >跟进者</th>
+                            <th class="sorting">状态</th>
+                            <th class="sorting">提出日期</th>
+                            <th class="sorting">解决日期</th>
+                            <th class="sorting">是否系统导致</th>
+                            <th class="sorting">备注</th>
+                            <th class="sorting">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for obj in questions_list %}
+                             <tr role="row" class="odd">
+                                <td class="sorting">{{ obj.id }}</td>
+                                <td class="sorting" style="width: 5%;word-break: break-all">{{ obj.project }}</td>
+                                <td class="sorting" style="width: 5%;word-break: break-all">{{ obj.question_module }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 15%">{{ obj.question_desc }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 15%">{{ obj.question_reason }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 10%">{{ obj.question_reporter }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 10%">{{ obj.question_answer }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 10%;">{{ obj.question_progress }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 10%">{{ obj.create_time |  convert_date_time_to_str}} </td>
+                                <td class="sorting" style="word-break: break-all;width: 10%">{{ obj.update_time | convert_date_time_to_str }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 5%">{{ obj.is_system_cause }}</td>
+                                <td class="sorting" style="word-break: break-all;width: 10%">{{ obj.question_comments }}</td>
+                                <td class="sorting">
+                                     <button class="btn btn-primary btn-sm" onclick="skip_to_questions_detail({{ obj.id }})">编辑</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+           <div class="panel-footer">
+              <ul class="pagination" style="float: right" id="pagination">
+                  {% if  paginator.has_previous %}
+                      <li><a>Prev</a> </li>
+                      {% if paginator.has_page_hader %}
+                          <li ><a >1</a> </li>
+                          <li class="disabled"><a >.....</a> </li>
+                      {% endif %}
+                   {% else %}
+                      <li class="disabled"><a  >Prev</a> </li>
+                  {% endif %}
+                  {% for range in paginator.page_range %}
+                       <li><a href="#">{{ range }}</a></li>
+                  {% endfor %}
+                  {% if paginator.has_next %}
+                      {% if paginator.has_page_footer %}
+                           <li class="disabled"><a>.....</a> </li>
+                      {% endif %}
+                      <li><a >{{ paginator.total_page }}</a> </li>
+                      <li><a>Next</a> </li>
+                  {% else %}
+                      <li><a >{{ paginator.total_page }}</a> </li>
+                      <li class="disabled"><a  >Next</a> </li>
+                  {% endif %}
+            </ul>
+           </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

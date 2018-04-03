@@ -1,0 +1,103 @@
+{% load common_fillter %}
+<p>Dear ALL:</p>
+<p>以下为本周催收系统问题反馈总结,请知悉,谢谢！</p>
+<br />
+
+<table style="font-size:11px; border: 1px #666666; border-collapse: collapse; cellpadding: 10;width: 100%">
+    <thead>
+        <tr class="center aligned" style="mso-yfti-irow:0;mso-yfti-firstrow:yes;height:23.1pt">
+            <th  style="width:530.65pt;border:solid windowtext 1.0pt;background:#FFC000;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="6">本周问题反馈</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr style="mso-yfti-irow:1;height:23.1pt">
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">模块</th>
+                <th style="width:214.15pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">总问题数</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">已解决</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">新提出</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">待跟进</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">解决率</th>
+            </tr>
+            <tr>
+                 {% for k,v in now_week_questions.items %}
+                     <tr role="row" class="odd">
+                         <td style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ k }}</td>
+                         <td style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ v.Total }}</td>
+                         <td style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ v.Done }}</td>
+                         <td style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ v.New }}</td>
+                         <td style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ v.In_Progress }}</td>
+                         <td style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ v.Resolve }}</td>
+                     </tr>
+                 {% endfor %}
+            </tr>
+    </tbody>
+</table>
+
+<br />
+<table style="font-size:11px; border: 1px #666666; border-collapse: collapse; cellpadding: 10;width: 100%">
+    <thead>
+        <tr class="center aligned" style="mso-yfti-irow:0;mso-yfti-firstrow:yes;height:23.1pt">
+            <th  style="width:530.65pt;border:solid windowtext 1.0pt;background:#FFC000;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="6">所有问题反馈</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr style="mso-yfti-irow:1;height:23.1pt">
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">模块</th>
+                <th style="width:214.15pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">总问题数</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">已解决</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">新提出</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">待跟进</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">解决率</th>
+            </tr>
+            <tr>
+                 {% for k,v in all_questions.items %}
+                     <tr role="row" class="odd">
+                         <td style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ k }}</td>
+                         <td style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ v.Total }}</td>
+                         <td style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ v.Done }}</td>
+                         <td style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ v.New }}</td>
+                         <td style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ v.In_Progress }}</td>
+                         <td style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ v.Resolve }}</td>
+                     </tr>
+                 {% endfor %}
+            </tr>
+    </tbody>
+</table>
+
+<br />
+<table style="font-size:11px; border: 1px #666666; border-collapse: collapse; cellpadding: 10;width: 100%">
+    <thead>
+        <tr class="center aligned" style="mso-yfti-irow:0;mso-yfti-firstrow:yes;height:23.1pt">
+            <th  style="width:530.65pt;border:solid windowtext 1.0pt;background:#FFC000;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="8">所有待跟进问题</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr style="mso-yfti-irow:1;height:23.1pt">
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">项目</th>
+                <th style="width:214.15pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">模块</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">问题描述</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">问题解决方案</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">状态</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">提出日期</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">解决日期</th>
+                <th style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt" colspan="1">是否系统导致</th>
+            </tr>
+            <tr>
+                 {% for obj in not_done_questions %}
+                     <tr role="row" class="odd">
+                         <td  style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ obj.project }}</td>
+                         <td  style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ obj.question_module }}</td>
+                         <td  style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ obj.question_desc }}</td>
+                         <td  style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ obj.question_reason }}</td>
+                         <td  style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ obj.question_progress }}</td>
+                         <td  style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ obj.create_time |  convert_date_time_to_str}} </td>
+                         <td  style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ obj.update_time | convert_date_time_to_str }}</td>
+                         <td  style="width:134.95pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt"  colspan="1">{{ obj.is_system_cause }}</td>
+                     </tr>
+                 {% endfor %}
+            </tr>
+    </tbody>
+</table>
+
+<br />
+<p>Detail information is <a href="XXX">XXX</a> </p>

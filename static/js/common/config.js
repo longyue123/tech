@@ -1,0 +1,5 @@
+const questionsAdd="/questions/add"
+const questionsEdit="/questions/edit"
+const questionsDetail="/questions/detail"
+const questionsList="/questions/list"
+const questionsListByModuleName="/questions/list/by_module_name"
